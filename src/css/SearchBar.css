@@ -1,0 +1,30 @@
+#searchbar-container {
+	display: flex;
+	flex-direction: row;
+	margin: 30px 10px;
+}
+
+#searchbar-container > div {
+	width: 33.33%;
+}
+
+#q-input {
+	width: 100%;
+	padding: 10px;
+    border: 2px solid #9e9e9e;
+    border-radius: 5px;
+    font-weight: 550;
+}
+
+#site-title {
+	color: #008574;
+	font-size: 1.5em;
+	font-weight: 800;
+}
+
+#search-btn {
+	padding: 10px;
+	background-color: #344B47 !important;
+	width: 200px;
+    margin-left: 10px;
+}

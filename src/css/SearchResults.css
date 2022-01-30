@@ -1,0 +1,40 @@
+#results-container {
+    display: flex;
+    flex-direction: column;
+    width: 33.33%;
+    margin: auto;
+}
+
+#results-container>div {
+    border: 2px solid #d6d5d5;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.result {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	padding: 10px;
+}
+
+.result > div {
+	padding: 5px;
+}
+
+.result .space-title {
+	color: #344B47;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.result .space-timing {
+	font-weight: bold;
+    color: #96B1AB;
+    font-size: 13px;
+}
+
+.result .action-btn button {
+	width: 100%;
+	padding: 5px;
+}
