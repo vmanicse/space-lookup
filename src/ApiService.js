@@ -12,12 +12,13 @@ export function ApiService() {
 	}
 
 	async function fetchUserData(id) {
-		const res = await fetch('https://cors-anywhere.herokuapp.com/'+'https://api.twitter.com/2/users/by/username/being_mani', {headers});
+		const res = await fetch('https://api.twitter.com/2/users/by/username/being_mani', {method: 'GET', headers: headers});
 		const result = res.json();
 		return result;
 	}
 
 	return {
-		searchByKeyword: searchByKeyword
+		searchByKeyword: searchByKeyword,
+		fetchUserData: fetchUserData
 	}
 }

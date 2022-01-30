@@ -4,8 +4,8 @@ import { ApiService } from './ApiService.js';
 
 export function SearchResults() {
 
-	let res = ApiService().searchByKeyword('BB15');
-	let res1 = ApiService().fetchUserData('1475790344574799872');
+	ApiService().searchByKeyword('BB15');
+	ApiService().fetchUserData('1475790344574799872');
 
 	return(
 
