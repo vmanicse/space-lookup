@@ -4,7 +4,7 @@ export function ApiService() {
 
 	async function searchByKeyword(keyword) {
 		const headers = {
-			"Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAKacYgEAAAAA00%2Fiyz%2Fot5Uhlvvxtblb8m7H5Aw%3DGOonXNRlv0ReYOB4uzm9RHuvdNpXZqjW9w5joG9Uq9KhvbnRs0"
+			"Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAJSyYgEAAAAATIcYBvDxLl8wesEdKnelcg8xaWw%3DwzjUq0ZPtIb12DN57VVSAxXineFyeOQRzXqTTI4ilXA22fCVXO"
 		};
 		const res = await fetch('https://cors-anywhere.herokuapp.com/'+url+'?query='+keyword, {headers});
 		const result = res.json();
