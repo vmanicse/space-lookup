@@ -23,13 +23,20 @@ export function SearchResults({result, creatorList}) {
 					{card?.started_at ? (<span className="time">Started at: {formatDate(card.started_at)}</span>) : <span className="time">Scheduled at: {formatDate(card.scheduled_start)}</span>}
 				</div>
 				<div id="listener-count"><i className="fa fa-headphones"></i> {card?.participant_count} Listeners</div>
-				<div id="host-info-container">
-					<div id="creator-name">Created by:&nbsp;&nbsp;</div>
-					<div id="host-info">
-						<div id="img"><img src={creatorList[index]?.profile_image_url} width="100%"/></div>
-						<div id="name">&nbsp;&nbsp;<a href={ApiService().twitterUrl+creatorList[index]?.username} target="_blank">{creatorList[index]?.name}</a></div>
+				
+				{ creatorList[index]?.profile_image_url ? (
+					<div id="host-info-container">
+						<div id="creator-name">Created by:&nbsp;&nbsp;</div>
+						<div id="host-info">
+							<div id="img"><img src={creatorList[index]?.profile_image_url} width="100%"/></div>
+							<div id="name">&nbsp;&nbsp;<a href={ApiService().twitterUrl+creatorList[index]?.username} target="_blank">{creatorList[index]?.name}</a></div>
+						</div>
 					</div>
-				</div>
+					) 
+				: 
+					(<></>)
+				}
+				
 				<div className="action-btn">
 					<button><i className="fa fa-headphones" onClick={() => listen(card.id)}></i>&nbsp;&nbsp;Listen</button>
 				</div>
