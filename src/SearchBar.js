@@ -39,7 +39,7 @@ export function SearchBar() {
 				<div><button id="search-btn" onClick = {search}>Search</button></div>
 			</div>
 
-			{isLoading ? (<h2>Searching... Please wait.</h2>) : (<SearchResults result = {result} creatorList = {creatorList}/>)}
+			{isLoading ? (<p className="loading">Searching... Please wait.</p>) : (<SearchResults result = {result} creatorList = {creatorList}/>)}
         </>
 
     );

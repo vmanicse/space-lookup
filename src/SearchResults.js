@@ -3,7 +3,10 @@ import './css/SearchResults.css';
 import {ApiService} from './ApiService.js';
 
 export function SearchResults({result, creatorList}) {
-	function listen() {}
+	
+	function listen(spaceId) { 
+		window.open(`${ApiService().twitterUrl}i/spaces/${spaceId}`, '_blank');
+	}
 
 	function formatDate(dateString) {
 		if(dateString == null) return;
@@ -38,7 +41,7 @@ export function SearchResults({result, creatorList}) {
 				}
 				
 				<div className="action-btn">
-					<button><i className="fa fa-headphones" onClick={() => listen(card.id)}></i>&nbsp;&nbsp;Listen</button>
+					<button onClick={() => listen(card.id)}><i className="fa fa-headphones"></i>&nbsp;&nbsp;Listen</button>
 				</div>
 			</div>
 		);

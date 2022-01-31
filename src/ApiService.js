@@ -1,6 +1,7 @@
 export function ApiService() {
 
 	const BaseUrl = 'https://space-lookup-backend.herokuapp.com/';
+	//const BaseUrl = 'http://localhost:4200/';
 	
 	async function searchByKeyword(keyword) {
 		const body = {'q': keyword};
@@ -11,13 +12,8 @@ export function ApiService() {
 		return result;
 	}
 
-	async function fetchUserData(id) {
-		//1475790344574799872
-	}
-
 	return {
 		twitterUrl: 'https://twitter.com/',
 		searchByKeyword: searchByKeyword,
-		fetchUserData: fetchUserData
 	}
 }
