@@ -6,7 +6,7 @@ export function ApiService() {
 	async function searchByKeyword(keyword) {
 		const body = {'q': keyword};
 		const headers = {'Content-Type':'application/json'};
-		let res = await fetch(BaseUrl+'/search', {method:'POST', headers: headers, body: JSON.stringify(body)});
+		let res = await fetch(BaseUrl+'search', {method:'POST', headers: headers, body: JSON.stringify(body)});
 		let result = await res.json();
 		console.log(result);
 		return result;
