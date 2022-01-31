@@ -1,23 +1,20 @@
 export function ApiService() {
 
-	const url = 'https://api.twitter.com/2/spaces/search';
-	const headers = {
-			"Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAJSyYgEAAAAATIcYBvDxLl8wesEdKnelcg8xaWw%3DwzjUq0ZPtIb12DN57VVSAxXineFyeOQRzXqTTI4ilXA22fCVXO"
-		};
-
 	async function searchByKeyword(keyword) {
-		const res = await fetch('https://cors-anywhere.herokuapp.com/'+url+'?query='+keyword, {headers});
-		const result = res.json();
+		const body = {'q': keyword};
+		const headers = {'Content-Type':'application/json'};
+		let res = await fetch('http://localhost:4200/search', {method:'POST', headers: headers, body: JSON.stringify(body)});
+		let result = await res.json();
+		console.log(result);
 		return result;
 	}
 
 	async function fetchUserData(id) {
-		const res = await fetch('https://api.twitter.com/2/users/by/username/being_mani', {method: 'GET', headers: headers});
-		const result = res.json();
-		return result;
+		//1475790344574799872
 	}
 
 	return {
+		twitterUrl: 'https://twitter.com/',
 		searchByKeyword: searchByKeyword,
 		fetchUserData: fetchUserData
 	}

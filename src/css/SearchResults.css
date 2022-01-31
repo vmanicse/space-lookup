@@ -38,3 +38,37 @@
 	width: 100%;
 	padding: 5px;
 }
+
+#listener-count {
+    color: gray;
+    font-size: 10px;
+}
+
+.time {
+    color: #344B47;
+}
+
+#host-info-container {
+	display: flex;
+	align-items: center;
+}
+
+#host-info-container #creator-name, #host-info #name {
+	color: #344B47;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+#host-info {
+	display: flex;
+	align-items: center;
+}
+
+#host-info #img {
+	width: 30px;
+}
+
+#host-info #img img {
+	border-radius: 50%;
+    border: 1px solid gray;
+}
