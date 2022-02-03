@@ -29,6 +29,15 @@
     margin-left: 10px;
 }
 
-.loading {
+.loading, #no-result {
 	text-align: center;
+	font-weight: bold;
+}
+
+.loading {
+	color: #344b47;
+}
+
+#no-result {
+	color: #a71f15;
 }

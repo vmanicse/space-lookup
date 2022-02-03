@@ -8,8 +8,11 @@ export function SearchBar() {
 	const queryRef = useRef('');
 	const [isLoading, setLoading] = useState(false);
 	const [result, setResult] = useState([]);
+	const [noResultFound, setNoResut] = useState(false);
 	const [creatorList, setCreatorList] = useState([]);
 	const errors = [undefined, null, ''];
+	const loadingMsg = 'Searching... Please wait.';
+	const noResultMsg = 'Sorry. The term you entered did not bring up any results.';
 
 	const searchResult = ApiService().searchByKeyword;
 
@@ -21,15 +24,32 @@ export function SearchBar() {
 		if(res['data'] != undefined) {
 			setResult(res['data']);
 			setCreatorList(res['includes']['users']);
+			setNoResut(false);
 		} else {
 			setResult([]);
 			setCreatorList([]);
+			setNoResut(true);
 		}
 		setLoading(false);
 	}
 
 	function keyupSearch(e) {
-		if(e.keyCode == '13') search();
+		if(e.keyCode == '13') {
+			e.target.blur();
+			search();
+		}
+	}
+
+	function loadingScreen() {
+		return (<p className="loading">{loadingMsg}</p>);
+	}
+
+	function resultsNotFound() {
+		return (<p id="no-result">{noResultMsg}</p>);
+	}
+
+	function getSearchResults() {
+		return (<SearchResults result = {result} creatorList = {creatorList} noResultFound = {noResultFound}/>);
 	}
 
     return (
@@ -45,7 +65,7 @@ export function SearchBar() {
 				<div><button id="search-btn" onClick = {search}>Search</button></div>
 			</div>
 
-			{isLoading ? (<p className="loading">Searching... Please wait.</p>) : (<SearchResults result = {result} creatorList = {creatorList}/>)}
+			{ isLoading ? loadingScreen() : noResultFound ? resultsNotFound() : getSearchResults() }
         </>
 
     );

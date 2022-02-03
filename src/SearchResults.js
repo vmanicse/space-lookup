@@ -1,8 +1,12 @@
-import React from 'react';
+import {React,useState} from 'react';
 import './css/SearchResults.css';
 import {ApiService} from './ApiService.js';
 
-export function SearchResults({result, creatorList}) {
+export function SearchResults({result, creatorList, noResultFound}) {
+	
+	const [initiatePagination, setPaginationDone] = useState(false);
+	const [resultCards, setResultCards] = useState([]);
+  	let paginatedPageContainer = [];
 	
 	function listen(spaceId) { 
 		window.open(`${ApiService().twitterUrl}i/spaces/${spaceId}`, '_blank');
@@ -11,21 +15,22 @@ export function SearchResults({result, creatorList}) {
 	function formatDate(dateString) {
 		if(dateString == null) return;
 		let date = new Date(dateString);
-		return date.toLocaleString();
+		return `${date.toDateString()}, ${date.toLocaleTimeString()}`;
 	}
 
-	const resultCards = result.map((card, index) => {
+	
+	const resultCardList = result.map((card, index) => {
 		return (
 			<div className="result" key={index}>
 				<div className="space-title">
 					<i className="fa fa-microphone-alt"></i>&nbsp;&nbsp;{card.title}
 				</div>
-				<div className="space-timing" style={card.state === 'live' ? {'color': '#4caf50'} : {}}>
+				<div className="space-timing" style={card.state === 'live' ? {'color': '#4caf50'} : {'color': 'gray'}}>
 					{card.state.toUpperCase()}
 					<br/><br/>
 					{card?.started_at ? (<span className="time">Started at: {formatDate(card.started_at)}</span>) : <span className="time">Scheduled at: {formatDate(card.scheduled_start)}</span>}
 				</div>
-				<div id="listener-count"><i className="fa fa-headphones"></i> {card?.participant_count} Listeners</div>
+				{card?.started_at ? <div id="listener-count"><i className="fa fa-headphones"></i> {card?.participant_count} Listeners</div> : <></>}
 				
 				{ creatorList[index]?.profile_image_url ? (
 					<div id="host-info-container">
@@ -41,23 +46,78 @@ export function SearchResults({result, creatorList}) {
 				}
 				
 				<div className="action-btn">
-					<button onClick={() => listen(card.id)}><i className="fa fa-headphones"></i>&nbsp;&nbsp;Listen</button>
+				{
+					card?.started_at ? 
+						<button onClick={() => listen(card.id)}><i className="fa fa-headphones"></i>&nbsp;&nbsp;Listen</button>
+					:
+						<button onClick={() => listen(card.id)}><i className="fas fa-bell"></i>&nbsp;&nbsp;Set Reminder</button>
+				}
 				</div>
 			</div>
 		);
 	});
 
+	const paginationProcess = () => {
+    	paginatedPageContainer = [];
+    	let temp = [...resultCardList],
+      	_chunk = [];
+    	while (temp.length > 0) {
+      		_chunk = temp.splice(0, 10);
+      		paginatedPageContainer.push(_chunk);
+    	}
+  	};
+
+  	const paginator = (e = null, index = 0) => {
+    	if (e != null) {
+      		e.preventDefault();
+      		index = Number(e.target.id);
+      		e.stopPropagation();
+      		activeBtnStyling(e.target.id);
+      		if (Number(e.target.id)) window.scrollTo({ top: 0, behavior: 'smooth' });
+    	}
+    	if (index < paginatedPageContainer.length && paginatedPageContainer.length !== 0)
+      	setResultCards(paginatedPageContainer[index]);
+    	setPaginationDone(true);
+  	};
+
+  	const activeBtnStyling = (id) => {
+    	let pageBtnList = document.getElementById('result-paginator');
+    	if (pageBtnList.id == id) return;
+    	let list = Array.from(pageBtnList.children);
+    	list.map((element) => {
+      		if (id === element.id) element.classList.toggle('activePageBtn');
+      		else element.classList.remove('activePageBtn');
+    	});
+  	};
+
+  	if (result.length !== 0) {
+    	paginationProcess();
+    	if (!initiatePagination) {
+      		paginator(null, 0);
+      		setTimeout(() => activeBtnStyling('0'), 1000);
+    	}
+  	}
+
+  	const pagination = paginatedPageContainer.map((page, index) => {
+    	let page_number = index + 1;
+    	return (
+      		<button key={index} id={index}>
+        		{page_number}
+      		</button>
+    	);
+  	});
+
 	return(
-		result.length != 0 ? (
-
-			<>
-				<div id="results-container">{resultCards}</div>
-				<p id="credit"><small>Developed by twitter.com/being_mani | Powered by Twitter</small></p>
-			</>
-		) : (
-
-		<div></div>
-
-		)
+		<>
+			<div id="results-container">{resultCards}</div>
+			<div id="result-paginator" onClick={(e) => paginator(e)}>{pagination}</div>
+			<p id="credit">
+				<small>
+					<a style={{'color':'gray'}} href={`${ApiService().twitterUrl}/being_mani`} target="_blank">
+						Developed by <i className="fab fa-twitter"></i>@being_mani | Powered by Twitter
+					</a>
+				</small>
+			</p>
+		</>
 	);
 }

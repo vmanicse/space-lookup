@@ -36,4 +36,9 @@
     .result < div {
     	margin-bottom: 10px;
     }
+
+    #result-paginator {
+        width: 100%;
+        justify-content: start;
+    }
 }

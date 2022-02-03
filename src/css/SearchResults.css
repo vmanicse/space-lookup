@@ -72,3 +72,36 @@
 	border-radius: 50%;
     border: 2px solid #d6d5d5;
 }
+
+#result-paginator {
+  display: flex;
+  width: 75%;
+  margin: auto auto 30px auto;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+#result-paginator > button {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  background: #344B47;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+#result-paginator > div:hover {
+  text-decoration: underline;
+}
+
+.activePageBtn {
+	border: 2px solid #344B47 !important;
+    background: #fff !important;
+    color: #344B47 !important;
+}
