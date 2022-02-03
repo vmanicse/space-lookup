@@ -21,6 +21,9 @@ export function SearchBar() {
 		if(res['data'] != undefined) {
 			setResult(res['data']);
 			setCreatorList(res['includes']['users']);
+		} else {
+			setResult([]);
+			setCreatorList([]);
 		}
 		setLoading(false);
 
