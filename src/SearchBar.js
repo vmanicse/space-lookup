@@ -60,7 +60,7 @@ export function SearchBar() {
 					Space <i className="fa fa-microphone-alt"></i> Lookup
 				</div>
 				<div id="searchbar">
-					<input type="text" name="q" id="q-input" placeholder="Try searching for Twitter spaces" ref={queryRef} onKeyUp={(e) => keyupSearch(e)} />
+					<input type="search" name="q" id="q-input" placeholder="Try searching for Twitter spaces" ref={queryRef} onKeyUp={(e) => keyupSearch(e)} />
 				</div>
 				<div><button id="search-btn" onClick = {search}>Search</button></div>
 			</div>
