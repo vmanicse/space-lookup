@@ -20,7 +20,7 @@ export function SearchResults({result, creatorList}) {
 				<div className="space-title">
 					<i className="fa fa-microphone-alt"></i>&nbsp;&nbsp;{card.title}
 				</div>
-				<div className="space-timing" style={card.state === 'live' ? {'color': '#4caf50'} : {'color': '#d6d5d5'}}>
+				<div className="space-timing" style={card.state === 'live' ? {'color': '#4caf50'} : {}}>
 					{card.state.toUpperCase()}
 					<br/><br/>
 					{card?.started_at ? (<span className="time">Started at: {formatDate(card.started_at)}</span>) : <span className="time">Scheduled at: {formatDate(card.scheduled_start)}</span>}

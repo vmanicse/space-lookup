@@ -14,9 +14,9 @@ export function SearchBar() {
 	const searchResult = ApiService().searchByKeyword;
 
 	async function search() {
-		setLoading(true);
 		const q = queryRef.current.value;
 		if(errors.includes(q)) return;
+		setLoading(true);
 		let res = await searchResult(q);
 		if(res['data'] != undefined) {
 			setResult(res['data']);
@@ -26,7 +26,10 @@ export function SearchBar() {
 			setCreatorList([]);
 		}
 		setLoading(false);
+	}
 
+	function keyupSearch(e) {
+		if(e.keyCode == '13') search();
 	}
 
     return (
@@ -37,7 +40,7 @@ export function SearchBar() {
 					Space <i className="fa fa-microphone-alt"></i> Lookup
 				</div>
 				<div id="searchbar">
-					<input type="text" name="q" id="q-input" placeholder="Search Twitter spaces by name" ref={queryRef} />
+					<input type="text" name="q" id="q-input" placeholder="Try searching for Twitter spaces" ref={queryRef} onKeyUp={(e) => keyupSearch(e)} />
 				</div>
 				<div><button id="search-btn" onClick = {search}>Search</button></div>
 			</div>

@@ -8,7 +8,6 @@ export function ApiService() {
 		const headers = {'Content-Type':'application/json'};
 		let res = await fetch(BaseUrl+'search', {method:'POST', headers: headers, body: JSON.stringify(body)});
 		let result = await res.json();
-		console.log(result);
 		return result;
 	}
 
