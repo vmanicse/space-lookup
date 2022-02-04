@@ -85,7 +85,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
     	if (pageBtnList.id == id) return;
     	let list = Array.from(pageBtnList.children);
     	list.map((element) => {
-      		if (id === element.id) element.classList.toggle('activePageBtn');
+      		if (id === element.id) element.classList.add('activePageBtn');
       		else element.classList.remove('activePageBtn');
     	});
   	};
@@ -110,7 +110,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 	return(
 		<>
 			<div id="results-container">{resultCards}</div>
-			<div id="result-paginator" onClick={(e) => paginator(e)}>{pagination}</div>
+			{result.length > 10 ? <div id="result-paginator" onClick={(e) => paginator(e)}>{pagination}</div> : <></>}
 			<p id="credit">
 				<small>
 					<a style={{'color':'gray'}} href={`${ApiService().twitterUrl}/being_mani`} target="_blank">

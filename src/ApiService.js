@@ -6,9 +6,14 @@ export function ApiService() {
 	async function searchByKeyword(keyword) {
 		const body = {'q': keyword};
 		const headers = {'Content-Type':'application/json'};
-		let res = await fetch(BaseUrl+'search', {method:'POST', headers: headers, body: JSON.stringify(body)});
-		let result = await res.json();
-		return result;
+		try {
+			let res = await fetch(BaseUrl+'search', {method:'POST', headers: headers, body: JSON.stringify(body)});
+			let result = await res.json();
+			return {...result, ...{httpErr: false}};
+		}
+		catch(e) {
+			return {httpErr: true};
+		}
 	}
 
 	return {

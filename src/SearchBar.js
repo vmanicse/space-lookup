@@ -9,10 +9,12 @@ export function SearchBar() {
 	const [isLoading, setLoading] = useState(false);
 	const [result, setResult] = useState([]);
 	const [noResultFound, setNoResut] = useState(false);
+	const [isHttpErr, setHttpErr] = useState(false);
 	const [creatorList, setCreatorList] = useState([]);
 	const errors = [undefined, null, ''];
 	const loadingMsg = 'Searching... Please wait.';
 	const noResultMsg = 'Sorry. The term you entered did not bring up any results.';
+	const httpErrMsg = 'Sorry. Something went wrong.'
 
 	const searchResult = ApiService().searchByKeyword;
 
@@ -21,14 +23,18 @@ export function SearchBar() {
 		if(errors.includes(q)) return;
 		setLoading(true);
 		let res = await searchResult(q);
-		if(res['data'] != undefined) {
-			setResult(res['data']);
-			setCreatorList(res['includes']['users']);
-			setNoResut(false);
+		if(!res.httpErr) {
+			if(res['data'] != undefined) {
+				setResult(res['data']);
+				setCreatorList(res['includes']['users']);
+				setNoResut(false);
+			} else {
+				setResult([]);
+				setCreatorList([]);
+				setNoResut(true);
+			}
 		} else {
-			setResult([]);
-			setCreatorList([]);
-			setNoResut(true);
+			setHttpErr(true);
 		}
 		setLoading(false);
 	}
@@ -52,6 +58,10 @@ export function SearchBar() {
 		return (<SearchResults result = {result} creatorList = {creatorList} noResultFound = {noResultFound}/>);
 	}
 
+	function httpErr() {
+		return (<p id="no-result">{httpErrMsg}</p>);
+	}
+
     return (
 
         <>
@@ -65,7 +75,7 @@ export function SearchBar() {
 				<div><button id="search-btn" onClick = {search}>Search</button></div>
 			</div>
 
-			{ isLoading ? loadingScreen() : noResultFound ? resultsNotFound() : getSearchResults() }
+			{ isLoading ? loadingScreen() : noResultFound ? resultsNotFound() : isHttpErr ? httpErr() : getSearchResults() }
         </>
 
     );
