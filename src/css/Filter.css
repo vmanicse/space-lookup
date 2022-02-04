@@ -1,0 +1,30 @@
+#popup-container {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    transition: all 1s;
+    text-align: center;
+    color: #344B47;
+    padding-top: 40%;
+}
+
+select {
+	padding: 10px;
+    width: 90%;
+    color: #344B47;
+    font-size: 16px;
+    border: 2px solid #344B47;
+    border-radius: 10px;
+    margin: 25px auto;
+}
+
+#filter-button {
+	width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #344B47;
+    margin: 25px auto;
+}

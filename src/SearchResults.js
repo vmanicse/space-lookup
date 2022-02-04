@@ -1,4 +1,4 @@
-import {React,useState} from 'react';
+import {React, useState} from 'react';
 import './css/SearchResults.css';
 import {ApiService} from './ApiService.js';
 
@@ -7,7 +7,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 	const [initiatePagination, setPaginationDone] = useState(false);
 	const [resultCards, setResultCards] = useState([]);
   	let paginatedPageContainer = [];
-	
+
 	function listen(spaceId) { 
 		window.open(`${ApiService().twitterUrl}i/spaces/${spaceId}`, '_blank');
 	}
@@ -15,7 +15,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 	function formatDate(dateString) {
 		if(dateString == null) return;
 		let date = new Date(dateString);
-		return `${date.toDateString()}, ${date.toLocaleTimeString()}`;
+		return `${date.toDateString()}, ${date.toLocaleString().split(',')[1]}`;
 	}
 
 	
@@ -82,6 +82,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 
   	const activeBtnStyling = (id) => {
     	let pageBtnList = document.getElementById('result-paginator');
+    	if(pageBtnList == null) return;
     	if (pageBtnList.id == id) return;
     	let list = Array.from(pageBtnList.children);
     	list.map((element) => {
@@ -117,7 +118,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 						Developed by <i className="fab fa-twitter"></i>@being_mani | Powered by Twitter
 					</a>
 				</small>
-			</p>
+			</p>			
 		</>
 	);
 }

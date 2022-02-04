@@ -16,8 +16,22 @@ export function ApiService() {
 		}
 	}
 
+	async function searchTwitterUser(username) {
+		const body = {'username': username};
+		const headers = {'Content-Type':'application/json'};
+		try {
+			let res = await fetch(BaseUrl+'user', {method:'POST', headers: headers, body: JSON.stringify(body)});
+			let result = await res.json();
+			return {...result, ...{httpErr: false}};
+		}
+		catch(e) {
+			return {httpErr: true};
+		}
+	}
+
 	return {
 		twitterUrl: 'https://twitter.com/',
 		searchByKeyword: searchByKeyword,
+		searchTwitterUser: searchTwitterUser
 	}
 }

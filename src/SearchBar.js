@@ -1,7 +1,8 @@
-import {React, useState, useRef } from 'react';
+import {React, useState, useRef} from 'react';
 import './css/SearchBar.css';
 import { ApiService } from './ApiService.js';
 import { SearchResults } from './SearchResults'
+import {Filter} from './Filter';
 
 export function SearchBar() {
 
@@ -14,7 +15,9 @@ export function SearchBar() {
 	const errors = [undefined, null, ''];
 	const loadingMsg = 'Searching... Please wait.';
 	const noResultMsg = 'Sorry. The term you entered did not bring up any results.';
-	const httpErrMsg = 'Sorry. Something went wrong.'
+	const httpErrMsg = 'Sorry. Something went wrong.';
+	const [filterIcon, setFilterIcon] = useState("fas fa-filter");
+	const [filterOn, setFilter] = useState(false);
 
 	const searchResult = ApiService().searchByKeyword;
 
@@ -62,6 +65,26 @@ export function SearchBar() {
 		return (<p id="no-result">{httpErrMsg}</p>);
 	}
 
+	function filterSearch() {
+  		if(filterOn) {
+  			setFilter(false);
+  			setFilterIcon("fas fa-filter");
+  		} else {
+  			setFilter(true);
+  			setFilterIcon("fas fa-times");
+  		}
+  	}
+
+  	function filterOptions(options) {
+  		filterSearch();
+  		let filtered_result = result.filter(obj => {
+  			if(options.status != '' && obj.state == options.status) {
+  				return obj;
+  			}
+  		});
+  		setResult(filtered_result);
+  	}
+
     return (
 
         <>
@@ -76,6 +99,9 @@ export function SearchBar() {
 			</div>
 
 			{ isLoading ? loadingScreen() : noResultFound ? resultsNotFound() : isHttpErr ? httpErr() : getSearchResults() }
+
+			{/* <div id="filter-icon" onClick={filterSearch}><i className={filterIcon}></i></div> */}
+   {/*    		{filterOn ? <Filter filterOptions={filterOptions} /> : <></>} */}
         </>
 
     );
