@@ -31,7 +31,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 			hours = hour_in_24hrFormat;
 			meridiem = 'AM';
 		}
-		return `${hours}:${minutes} ${meridiem}`;
+		return `${hours}:${minutes < 10 ? '0'+minutes : minutes} ${meridiem}`;
 	}
 
 	
