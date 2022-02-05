@@ -28,7 +28,8 @@ export function SearchResults({result, creatorList, noResultFound}) {
 			else hours = hour_in_24hrFormat - 12;
 			meridiem = 'PM';		
 		} else {
-			hours = hour_in_24hrFormat;
+			if(hour_in_24hrFormat == 0) hours = 1;
+			else hours = hour_in_24hrFormat;
 			meridiem = 'AM';
 		}
 		return `${hours}:${minutes < 10 ? '0'+minutes : minutes} ${meridiem}`;
