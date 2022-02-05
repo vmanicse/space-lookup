@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 33.33%;
     margin: auto;
+    overflow-wrap: break-word;
 }
 
 #results-container>div {
@@ -93,8 +94,6 @@
   cursor: pointer;
   user-select: none;
   background: #344B47;
-  width: 40px !important;
-  height: 40px !important;
 }
 
 #result-paginator > div:hover {
