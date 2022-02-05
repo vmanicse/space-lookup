@@ -50,7 +50,12 @@ export function SearchBar() {
 	}
 
 	function loadingScreen() {
-		return (<p className="loading">{loadingMsg}</p>);
+		return (
+			<>
+				<div id="loading-icon"><i className="fa fa-microphone-alt"></i></div>
+				<p className="loading">{loadingMsg}</p>				
+			</>
+		);
 	}
 
 	function resultsNotFound() {
@@ -93,9 +98,9 @@ export function SearchBar() {
 					Space <i className="fa fa-microphone-alt"></i> Lookup
 				</div>
 				<div id="searchbar">
-					<input type="search" name="q" id="q-input" placeholder="Try searching for Twitter spaces" ref={queryRef} onKeyUp={(e) => keyupSearch(e)} />
+					<input type="search" name="q" id="q-input" placeholder="Try searching for Twitter spaces" ref={queryRef} onKeyUp={(e) => keyupSearch(e)} disabled={isLoading} />
 				</div>
-				<div><button id="search-btn" onClick = {search}>Search</button></div>
+				<div><button id="search-btn" onClick = {search} disabled={isLoading}>Search</button></div>				
 			</div>
 
 			{ isLoading ? loadingScreen() : noResultFound ? resultsNotFound() : isHttpErr ? httpErr() : getSearchResults() }

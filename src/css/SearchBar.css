@@ -60,3 +60,24 @@
 #filter-icon i {
     margin-top: 10px;
 }
+
+#loading-icon {
+	text-align: center;
+    font-size: 2em;
+    color: #344b47;
+    border-radius: 50%;
+    border: 2px solid #344b47;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+#loading-icon i {
+	margin-top: 8px;
+    animation: rotate ease-in-out infinite 1s;
+}
+
+@keyframes rotate {
+	0% {transform: rotateY(0deg);}
+	100% {transform: rotateY(360deg);}
+}

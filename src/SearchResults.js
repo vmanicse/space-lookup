@@ -15,7 +15,23 @@ export function SearchResults({result, creatorList, noResultFound}) {
 	function formatDate(dateString) {
 		if(dateString == null) return;
 		let date = new Date(dateString);
-		return `${date.toDateString()}, ${date.toLocaleString().split(',')[1]}`;
+		return `${date.toDateString()}, ${getUserReadableTimeFormat(date)}`;
+	}
+
+	function getUserReadableTimeFormat(date) {
+		let minutes = date.getMinutes();
+		let meridiem = '';
+		let hours = '';
+		let hour_in_24hrFormat = date.getHours();
+		if(hour_in_24hrFormat >= 12) {
+			if(hour_in_24hrFormat == 12) hours = hour_in_24hrFormat;
+			else hours = hour_in_24hrFormat - 12;
+			meridiem = 'PM';		
+		} else {
+			hours = hour_in_24hrFormat;
+			meridiem = 'AM';
+		}
+		return `${hours}:${minutes} ${meridiem}`;
 	}
 
 	
