@@ -119,7 +119,7 @@ export function SearchResults({result, noResultFound}) {
     	let page_number = index + 1;
     	return (
       		<button key={index} id={index}>
-        		{page_number}
+        		{page_number < 10 ? '0'+page_number : page_number}
       		</button>
     	);
   	});
