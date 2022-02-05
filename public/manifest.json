@@ -1,16 +1,17 @@
 {
 	"short_name": "Space Lookup",
 	"name": "Space Lookup",
+	"description": "Space Lookup app helps to find the twitter spaces, by this app we can able to search twitter spaces with keywords.",
 	"icons": [
 		{
 			"src": "./logo.png",
 			"type": "image/png",
-			"sizes": "1024x1024",
-			"purpose": "any maskable"
+			"sizes": "1024x1024"
 		}
 	],
+	"orientation":"portrait",
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "#ffffff",
-	"background_color": "#344B47"
+	"background_color": "#ffffff"
 }
