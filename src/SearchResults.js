@@ -2,8 +2,8 @@ import {React, useState} from 'react';
 import './css/SearchResults.css';
 import {ApiService} from './ApiService.js';
 
-export function SearchResults({result, creatorList, noResultFound}) {
-	
+export function SearchResults({result, noResultFound}) {
+
 	const [initiatePagination, setPaginationDone] = useState(false);
 	const [resultCards, setResultCards] = useState([]);
   	let paginatedPageContainer = [];
@@ -49,12 +49,12 @@ export function SearchResults({result, creatorList, noResultFound}) {
 				</div>
 				{card?.started_at ? <div id="listener-count"><i className="fa fa-headphones"></i> {card?.participant_count} Listeners</div> : <></>}
 				
-				{ creatorList[index]?.profile_image_url ? (
+				{ card.creator_obj?.profile_image_url ? (
 					<div id="host-info-container">
 						<div id="creator-name">Created by:&nbsp;&nbsp;</div>
 						<div id="host-info">
-							<div id="img"><img src={creatorList[index]?.profile_image_url} width="100%"/></div>
-							<div id="name">&nbsp;&nbsp;<a href={ApiService().twitterUrl+creatorList[index]?.username} target="_blank">{creatorList[index]?.name}</a></div>
+							<div id="img"><img src={card.creator_obj?.profile_image_url} width="100%"/></div>
+							<div id="name">&nbsp;&nbsp;<a href={ApiService().twitterUrl+card.creator_obj?.username} target="_blank">{card.creator_obj?.name}</a></div>
 						</div>
 					</div>
 					) 
@@ -90,7 +90,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
       		index = Number(e.target.id);
       		e.stopPropagation();
       		activeBtnStyling(e.target.id);
-      		if (Number(e.target.id)) window.scrollTo({ top: 0, behavior: 'smooth' });
+      		if (Number(e.target.id) || e.target.id == '0') window.scrollTo({ top: 0, behavior: 'smooth' });
     	}
     	if (index < paginatedPageContainer.length && paginatedPageContainer.length !== 0)
       	setResultCards(paginatedPageContainer[index]);
@@ -99,8 +99,7 @@ export function SearchResults({result, creatorList, noResultFound}) {
 
   	const activeBtnStyling = (id) => {
     	let pageBtnList = document.getElementById('result-paginator');
-    	if(pageBtnList == null) return;
-    	if (pageBtnList.id == id) return;
+    	if(pageBtnList == null || pageBtnList.id == id) return;
     	let list = Array.from(pageBtnList.children);
     	list.map((element) => {
       		if (id === element.id) element.classList.add('activePageBtn');

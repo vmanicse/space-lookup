@@ -11,7 +11,6 @@ export function SearchBar() {
 	const [result, setResult] = useState([]);
 	const [noResultFound, setNoResut] = useState(false);
 	const [isHttpErr, setHttpErr] = useState(false);
-	const [creatorList, setCreatorList] = useState([]);
 	const errors = [undefined, null, ''];
 	const loadingMsg = 'Searching... Please wait.';
 	const noResultMsg = 'Sorry. The term you entered did not bring up any results.';
@@ -28,12 +27,17 @@ export function SearchBar() {
 		let res = await searchResult(q);
 		if(!res.httpErr) {
 			if(res['data'] != undefined) {
-				setResult(res['data']);
-				setCreatorList(res['includes']['users']);
+				
+				res['data'].map(space_data => {
+					res['includes']['users'].map(creator_data => {
+						if(space_data.creator_id === creator_data.id) space_data['creator_obj'] = creator_data;
+					});
+				});
+				
+				setResult(res['data']);				
 				setNoResut(false);
 			} else {
 				setResult([]);
-				setCreatorList([]);
 				setNoResut(true);
 			}
 		} else {
@@ -63,7 +67,7 @@ export function SearchBar() {
 	}
 
 	function getSearchResults() {
-		return (<SearchResults result = {result} creatorList = {creatorList} noResultFound = {noResultFound}/>);
+		return (<SearchResults result = {result} noResultFound = {noResultFound}/>);
 	}
 
 	function httpErr() {
