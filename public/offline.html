@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			    background-color: #344B47;
+    			margin: 0;
+    			color: #fff;
+    			font-family: sans-serif;
+    			text-align: center;
+		}
+		#icon-container {
+			padding-top: 200px;
+		}
+		p {
+			padding-top: 20px;
+		}
+		button {
+			padding: 10px;
+    		background-color: #fff;
+    		color: #344B47;
+    		border: none;
+    		font-size: 16px;
+    		font-weight: bold;
+    		width: 100px;
+    		margin-top: 20px;
+    		border-radius: 15px;
+    		cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="icon-container">
+		<!-- <span class="fa-stack fa-2x">
+			<i class="fas fa-slash fa-stack-2x"></i>
+			<i class="fas fa-wifi fa-stack-2x fa-inverse" style="color:#ffffff85"></i>
+		</span> -->
+	</div>
+	<h2>No internet connection</h2>
+	<p>Make sure Wi-Fi or mobile data is turned on, then try again.</p>
+	<button onclick="refreshPage()">Retry</button>
+	<script type="text/javascript">
+		function refreshPage() {
+			window.location.reload();
+		}
+	</script>
+</body>
+</html>
