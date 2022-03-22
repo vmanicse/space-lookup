@@ -130,10 +130,7 @@ export function SearchResults({result, noResultFound}) {
 			{result.length > 10 ? <div id="result-paginator" onClick={(e) => paginator(e)}>{pagination}</div> : <></>}
 			<p id="credit">
 				<small>
-// 					<a style={{'color':'gray'}} href={`${ApiService().twitterUrl}/being_mani`} target="_blank">
-// 						Developed by <i className="fab fa-twitter"></i>@being_mani | Powered by Twitter
-// 					</a>
-					<a>Powered by Twitter</a>
+					<a style={{'color':'gray'}}>Powered by Twitter</a>
 				</small>
 			</p>			
 		</>
